@@ -1,0 +1,433 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+void drivers(void)
+{
+ system("cls");
+  struct driv
+ {
+   float pow;
+   char u[15];
+   char i[15];
+   char fuse[50];
+ };
+ driv data[] =
+ {
+    {0.25,"220/380", "1.17/0.68","1.00-1.60/0.63-1.00 "},
+    {0.37,"220/380", "1.65/0.95","1.60-2.50/1.00-1.60 "},
+    {0.55,"220/380", "2.33/1.35","2.50-4.00/1.00-1.60 "},
+    {0.75,"220/380", "3.03/1.75","2.50-4.00/1.60-2.50 "},
+    {1.1,"220/380", "4.42/2.25","4.00-6.30/1.60-2.50 "},
+    {1.5,"220/380", "6.01/3.84","4.00-6.30/2.50-4.00 "},
+    {2.2,"220/380", "8.61/4.98","6.30-10.0/4.00-6.30 "},
+    {3.0,"220/380", "10.8/6.3","8.00-12.0/6.30-10.0 "},
+    {4.0,"220/380", "13.8/8.0","10.0-16.0/6.30-10.0 "},
+    {5.5,"220/380", "24.5/13.5","20.0-25.0/10.0-16.0 "},
+    {7.5,"220/380", "32.7/18.5","25.0-32.0/16.0-25.0 "},
+   };
+ printf("___________________________________________________________________\n");
+ printf("%s| %s| %s| %s|\n", "��������,��� ", "����������220/380", "���.���,A","        �����.����.  ");
+ printf("-------------------------------------------------------------------\n");
+ for (int i=0;i<sizeof(data)/sizeof(driv);++i)
+ {
+  printf("%12.2f |%17.8s |%9.9s | %10.21s |\n",data[i].pow,data[i].u,data[i].i,data[i].fuse);
+  }
+ system("pause");
+
+}
+
+
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <pod_wires.cpp>
+#include <drivers.cpp>
+int menu(void);
+void menu_select(void);
+void pod_wires(void);
+//pod_fuse(void);
+void drivers(void);
+//test(void);
+
+int main(void)
+ {
+   menu_select();
+   system("pause");
+ }
+ 
+ int menu(void)
+ {
+   system("chcp 1251");
+   system("cls");
+   char m[80];
+   int c;
+   printf("����������� ����������� ��� ���������� �������������� �� ���\n");
+   printf("1-������� ���������� �������� ��� ������� ��������\n");
+   printf("2-���������� ������ �� ����������� ���������� � ���.����.\n");
+   printf("3-�����\n");
+    do
+      {
+       printf("�������� �����\n");
+       gets(m);
+       c = atoi(m);
+      }
+    while(c<0 || c>3);
+    return c;
+ }
+ //----------------
+ void menu_select(void)
+   {
+    char choice;
+    while(true)
+       {
+         choice = menu();
+         switch(choice)
+         {
+           case 1: pod_wires();break;
+           case 2: drivers();break;
+           case 3: exit(0);
+         }
+       }
+   system("pause");
+ }
+
+
+
+
+#include <stdlib.h>
+#include <stdio.h>
+//#include <pod_wires.cpp>
+//#include <drivers.cpp>
+int menu(void);
+void menu_select(void);
+void pod_wires(void);
+//pod_fuse(void);
+void drivers(void);
+//test(void);
+
+int main(void)
+ {
+   menu_select();
+   system("pause");
+ }
+ 
+ int menu(void)
+ {
+   system("chcp 1251");
+   system("cls");
+   char m[80];
+   int c;
+   printf("����������� ����������� ��� ���������� �������������� �� ���\n");
+   printf("1-������� ���������� �������� ��� ������� ��������\n");
+   printf("2-���������� ������ �� ����������� ���������� � ���.����.\n");
+   printf("3-�����\n");
+    do
+      {
+       printf("�������� �����\n");
+       gets(m);
+       c = atoi(m);
+      }
+    while(c<0 || c>3);
+    return c;
+ }
+ //----------------
+ void menu_select(void)
+   {
+    char choice;
+    while(true)
+       {
+         choice = menu();
+         switch(choice)
+         {
+           case 1: pod_wires();break;
+           case 2: drivers();break;
+           case 3: exit(0);
+         }
+       }
+   system("pause");
+ }
+
+
+
+
+
+#include <stdlib.h>
+#include <stdio.h>
+
+void pod_wires(void)
+{
+ system("cls");
+ struct wires
+ {
+   float sech;
+   int wir2;
+   int wir3;
+   int wir4;
+   float pow220;
+   float pow380;
+ };
+ wires list[] =
+   {
+    {1, 16, 15, 14, 3.7, 6.4},
+    {1.5, 19, 17, 16, 5, 8.7},
+    {2, 24, 22, 20, 5.7, 9.8},
+    {2.5, 27, 25, 25, 6.6, 11.0},
+    {4, 38, 35, 30, 9.0, 15.0},
+    {5, 42, 39, 34, 11.0, 19.0},
+    {10, 70, 60, 50, 17.0, 30.0},
+    {16, 85, 80, 75, 22.0, 38.0},
+    {25, 115, 100, 90, 30.0, 53.0},
+    {35, 135, 125, 115, 37.0, 64.0}
+   };
+
+ printf("______________________________________________________________________\n");
+ printf("%71.100s\n","���������� ���,�       | ��������,���              |");
+ printf("----------------------------------------------------------------------\n");
+ printf("%s| %s| %s| %s| %s| %s|\n", " ������� ����,��2", "2 ����", "3 ����", "4 ���� ","�������� 220", "�������� 380");
+ printf("----------------------------------------------------------------------\n");
+ for (int i=0;i<sizeof(list)/sizeof(wires);++i)
+ {
+  printf("%16.1f |%6.2d |%6.2d |%7.2d |%12.2f |%13.2f|\n",list[i].sech,list[i].wir2,list[i].wir3,list[i].wir4,list[i].pow220,list[i].pow380);
+  }
+ system("pause");
+
+}
+
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="Project1.exe"/>
+    <OBJFILES value="main.obj"/>
+    <RESFILES value="Project1.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value=""/>
+    <PACKAGES value="vcl.bpi rtl.bpi dbrtl.bpi adortl.bpi vcldb.bpi vclx.bpi bdertl.bpi 
+      vcldbx.bpi ibxpress.bpi dsnap.bpi cds.bpi bdecds.bpi qrpt.bpi teeui.bpi 
+      teedb.bpi tee.bpi dss.bpi teeqr.bpi visualclx.bpi visualdbclx.bpi 
+      dsnapcrba.bpi dsnapcon.bpi bcbsmp.bpi vclie.bpi xmlrtl.bpi inet.bpi 
+      inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
+      bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
+      indy.bpi bcb2kaxserver.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value="_DEBUG"/>
+    <SYSDEFINES value="NO_STRICT;_NO_VCL;_RTLDLL;USEPACKAGES"/>
+    <MAINSOURCE value="Project1.bpf"/>
+    <INCLUDEPATH value="$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-src_suffix cpp -D_DEBUG -I$(BCB)\include -I$(BCB)\include\vcl -boa"/>
+    <CFLAG1 value="-tWC -tWM -Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v 
+      -vi- -c"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-Tpe -ap -D&quot;&quot; -x -Gn -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0x32.obj $(PACKAGES) $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cw32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="Project1.res" FORMNAME="" UNITNAME="Project1.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Project1.bpf" FORMNAME="" UNITNAME="Project1" CONTAINERID="BPF" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="main.cpp" FORMNAME="" UNITNAME="main" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1049
+CodePage=1251
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+  </IDEOPTIONS>
+</PROJECT>
+This file is used by the project manager only and should be treated like the project file
+
+
+main 
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="Project1.exe"/>
+    <OBJFILES value="main.obj drivers.obj pod_wires.obj"/>
+    <RESFILES value="Project1.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value=""/>
+    <PACKAGES value="vcl.bpi rtl.bpi dbrtl.bpi adortl.bpi vcldb.bpi vclx.bpi bdertl.bpi 
+      vcldbx.bpi ibxpress.bpi dsnap.bpi cds.bpi bdecds.bpi qrpt.bpi teeui.bpi 
+      teedb.bpi tee.bpi dss.bpi teeqr.bpi visualclx.bpi visualdbclx.bpi 
+      dsnapcrba.bpi dsnapcon.bpi bcbsmp.bpi vclie.bpi xmlrtl.bpi inet.bpi 
+      inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
+      bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
+      indy.bpi bcb2kaxserver.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value="_DEBUG"/>
+    <SYSDEFINES value="NO_STRICT;_NO_VCL;_RTLDLL;USEPACKAGES"/>
+    <MAINSOURCE value="Project1.bpf"/>
+    <INCLUDEPATH value="$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-src_suffix cpp -D_DEBUG -I$(BCB)\include -I$(BCB)\include\vcl -boa"/>
+    <CFLAG1 value="-tWC -tWM -Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v 
+      -vi- -c"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-Tpe -ap -D&quot;&quot; -x -Gn -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0x32.obj $(PACKAGES) $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cw32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="Project1.res" FORMNAME="" UNITNAME="Project1.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Project1.bpf" FORMNAME="" UNITNAME="Project1" CONTAINERID="BPF" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="main.cpp" FORMNAME="" UNITNAME="main" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="drivers.cpp" FORMNAME="" UNITNAME="drivers" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="pod_wires.cpp" FORMNAME="" UNITNAME="pod_wires" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1049
+CodePage=1251
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+  </IDEOPTIONS>
+</PROJECT>
+
+
